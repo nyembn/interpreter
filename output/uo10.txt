@@ -1,0 +1,4 @@
+Else : Syntax Error, unexpected symbol where else expected
+Else : Syntax Error, unexpected symbol where } expected
+( : Syntax Error, unexpected symbol where { expected
+( : Syntax Error, unexpected symbol where fun name expected

@@ -1,0 +1,67 @@
+square x
+{
+	(* x x)
+}
+
+pi
+{
+	3.14159
+}
+
+cylinderVolume length radius
+{
+	(* length (* (pi) (square radius)))
+}
+    
+fact n
+{
+	if (= n 0) then 1
+	else (* n (fact (- n 1)))
+}
+    
+test x y
+{
+	if (> x -0987) then +6453
+	else -1540
+}
+
+length list
+{
+	if (= list nil) then 0
+	else (+ 1 (length (second list)))
+}
+
+buildList i
+{
+	if (= i 0) then nil
+	else (pair i (buildList (- i 1)))
+}
+
+map f list
+{
+	if (= list nil) then nil
+	else (pair (f (first list)) (map f (second list)))
+}
+
+filter f list
+{
+	if (= list nil) then nil
+	else if (f (first list)) then (pair (first list) (filter f (second list)))
+	else (filter f (second list))
+}
+
+greaterThan10 x
+{
+    (> x 10)
+}
+
+accumulate f list initVal
+{
+	if (= list nil) then initVal
+	else (f (first list) (accumulate f (second list) initVal))
+}
+
+plus x y
+{
+	(+ x y)
+}

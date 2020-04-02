@@ -1,0 +1,3 @@
+* : Syntax Error, unexpected symbol where id, int, float, nil, (, or if expected
+* : Syntax Error, unexpected symbol where } expected
+* : Syntax Error, unexpected symbol where fun name expected

@@ -1,0 +1,24 @@
+test a1 a2 a3 x1 x2 x3
+{
+    if (< a1 a2) then (+ +123 -76)    
+    else if (and (<= x1 x3) (> a3 a1)) then (- (/ 7. .78) (* +54. -.123))
+    else if (or (< x1 x3) (>= a3 a1)) then (- (/ 87.54 .5E6) (* 7.e15 -87.54e-23))
+    else if (not (= x1 x3)) then (+ (/ 87.54e-9 .5E+6) (* -7.E-12 +87.101e23))
+    else (+ (/ -87.54e-9 +.5E+6) (* -7. +87.e23))
+}
+    
+fib n
+{
+    if (<= n 1) then n
+    else (+ (fib (- n 1)) (fib (- n 2)))
+}
+    
+testCond n
+{
+    if (< n 0) then -1f
+    else if (and (>= n 0) (< n 10)) then 5.0f
+    else if (and (>= n 10) (< n 20)) then +15.F
+    else if (and (>= n 20) (< n 30)) then 25.e-3f
+    else if (and (>= n 30) (< n 40)) then 35E+5f
+    else .45F
+}

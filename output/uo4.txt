@@ -1,0 +1,109 @@
+0 <fun def>
+ 1 <header>
+  2 <fun name> arithExample
+  2 <parameter list>
+   3 x1
+   3 x2
+   3 x3
+   3 x4
+   3 x5
+ 1 <exp>
+  2 <fun exp>
+   3 *
+   3 <exp list>
+    4 <exp>
+     5 <fun exp>
+      6 +
+      6 <exp list>
+       7 <exp>
+        8 x1
+       7 <exp>
+        8 x2
+       7 <exp>
+        8 x3
+       7 <exp>
+        8 x4
+       7 <exp>
+        8 x5
+    4 <exp>
+     5 <fun exp>
+      6 -
+      6 <exp list>
+       7 <exp>
+        8 x1
+       7 <exp>
+        8 x2
+       7 <exp>
+        8 x3
+       7 <exp>
+        8 x4
+       7 <exp>
+        8 x5
+    4 <exp>
+     5 <fun exp>
+      6 /
+      6 <exp list>
+       7 <exp>
+        8 x1
+       7 <exp>
+        8 x2
+       7 <exp>
+        8 x3
+       7 <exp>
+        8 x4
+       7 <exp>
+        8 x5
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> BoolExample
+  2 <parameter list>
+   3 b1
+   3 b2
+   3 b3
+   3 b4
+   3 b5
+   3 b6
+   3 b7
+   3 b8
+   3 b9
+   3 b10
+ 1 <exp>
+  2 <fun exp>
+   3 and
+   3 <exp list>
+    4 <exp>
+     5 <fun exp>
+      6 or
+      6 <exp list>
+       7 <exp>
+        8 b1
+       7 <exp>
+        8 b2
+       7 <exp>
+        8 b3
+       7 <exp>
+        8 b4
+       7 <exp>
+        8 b5
+    4 <exp>
+     5 <fun exp>
+      6 and
+      6 <exp list>
+       7 <exp>
+        8 b6
+       7 <exp>
+        8 b7
+       7 <exp>
+        8 b8
+       7 <exp>
+        8 b9
+       7 <exp>
+        8 b10
+    4 <exp>
+     5 <fun exp>
+      6 not
+      6 <exp list>
+       7 <exp>
+        8 b3
+

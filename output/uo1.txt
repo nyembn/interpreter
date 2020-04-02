@@ -1,0 +1,374 @@
+0 <fun def>
+ 1 <header>
+  2 <fun name> square
+  2 <parameter list>
+   3 x
+ 1 <exp>
+  2 <fun exp>
+   3 *
+   3 <exp list>
+    4 <exp>
+     5 x
+    4 <exp>
+     5 x
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> pi
+  2 <parameter list>
+ 1 <exp>
+  2 3.14159
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> cylinderVolume
+  2 <parameter list>
+   3 length
+   3 radius
+ 1 <exp>
+  2 <fun exp>
+   3 *
+   3 <exp list>
+    4 <exp>
+     5 length
+    4 <exp>
+     5 <fun exp>
+      6 *
+      6 <exp list>
+       7 <exp>
+        8 <fun exp>
+         9 pi
+         9 <exp list>
+       7 <exp>
+        8 <fun exp>
+         9 square
+         9 <exp list>
+          10 <exp>
+           11 radius
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> fact
+  2 <parameter list>
+   3 n
+ 1 <exp>
+  2 if
+   3 <exp>
+    4 <fun exp>
+     5 =
+     5 <exp list>
+      6 <exp>
+       7 n
+      6 <exp>
+       7 0
+  2 then
+   3 <exp>
+    4 1
+  2 else
+   3 <exp>
+    4 <fun exp>
+     5 *
+     5 <exp list>
+      6 <exp>
+       7 n
+      6 <exp>
+       7 <fun exp>
+        8 fact
+        8 <exp list>
+         9 <exp>
+          10 <fun exp>
+           11 -
+           11 <exp list>
+            12 <exp>
+             13 n
+            12 <exp>
+             13 1
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> test
+  2 <parameter list>
+   3 x
+   3 y
+ 1 <exp>
+  2 if
+   3 <exp>
+    4 <fun exp>
+     5 >
+     5 <exp list>
+      6 <exp>
+       7 x
+      6 <exp>
+       7 -987
+  2 then
+   3 <exp>
+    4 6453
+  2 else
+   3 <exp>
+    4 -1540
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> length
+  2 <parameter list>
+   3 list
+ 1 <exp>
+  2 if
+   3 <exp>
+    4 <fun exp>
+     5 =
+     5 <exp list>
+      6 <exp>
+       7 list
+      6 <exp>
+       7 nil
+  2 then
+   3 <exp>
+    4 0
+  2 else
+   3 <exp>
+    4 <fun exp>
+     5 +
+     5 <exp list>
+      6 <exp>
+       7 1
+      6 <exp>
+       7 <fun exp>
+        8 length
+        8 <exp list>
+         9 <exp>
+          10 <fun exp>
+           11 second
+           11 <exp list>
+            12 <exp>
+             13 list
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> buildList
+  2 <parameter list>
+   3 i
+ 1 <exp>
+  2 if
+   3 <exp>
+    4 <fun exp>
+     5 =
+     5 <exp list>
+      6 <exp>
+       7 i
+      6 <exp>
+       7 0
+  2 then
+   3 <exp>
+    4 nil
+  2 else
+   3 <exp>
+    4 <fun exp>
+     5 pair
+     5 <exp list>
+      6 <exp>
+       7 i
+      6 <exp>
+       7 <fun exp>
+        8 buildList
+        8 <exp list>
+         9 <exp>
+          10 <fun exp>
+           11 -
+           11 <exp list>
+            12 <exp>
+             13 i
+            12 <exp>
+             13 1
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> map
+  2 <parameter list>
+   3 f
+   3 list
+ 1 <exp>
+  2 if
+   3 <exp>
+    4 <fun exp>
+     5 =
+     5 <exp list>
+      6 <exp>
+       7 list
+      6 <exp>
+       7 nil
+  2 then
+   3 <exp>
+    4 nil
+  2 else
+   3 <exp>
+    4 <fun exp>
+     5 pair
+     5 <exp list>
+      6 <exp>
+       7 <fun exp>
+        8 f
+        8 <exp list>
+         9 <exp>
+          10 <fun exp>
+           11 first
+           11 <exp list>
+            12 <exp>
+             13 list
+      6 <exp>
+       7 <fun exp>
+        8 map
+        8 <exp list>
+         9 <exp>
+          10 f
+         9 <exp>
+          10 <fun exp>
+           11 second
+           11 <exp list>
+            12 <exp>
+             13 list
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> filter
+  2 <parameter list>
+   3 f
+   3 list
+ 1 <exp>
+  2 if
+   3 <exp>
+    4 <fun exp>
+     5 =
+     5 <exp list>
+      6 <exp>
+       7 list
+      6 <exp>
+       7 nil
+  2 then
+   3 <exp>
+    4 nil
+  2 else
+   3 <exp>
+    4 if
+     5 <exp>
+      6 <fun exp>
+       7 f
+       7 <exp list>
+        8 <exp>
+         9 <fun exp>
+          10 first
+          10 <exp list>
+           11 <exp>
+            12 list
+    4 then
+     5 <exp>
+      6 <fun exp>
+       7 pair
+       7 <exp list>
+        8 <exp>
+         9 <fun exp>
+          10 first
+          10 <exp list>
+           11 <exp>
+            12 list
+        8 <exp>
+         9 <fun exp>
+          10 filter
+          10 <exp list>
+           11 <exp>
+            12 f
+           11 <exp>
+            12 <fun exp>
+             13 second
+             13 <exp list>
+              14 <exp>
+               15 list
+    4 else
+     5 <exp>
+      6 <fun exp>
+       7 filter
+       7 <exp list>
+        8 <exp>
+         9 f
+        8 <exp>
+         9 <fun exp>
+          10 second
+          10 <exp list>
+           11 <exp>
+            12 list
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> greaterThan10
+  2 <parameter list>
+   3 x
+ 1 <exp>
+  2 <fun exp>
+   3 >
+   3 <exp list>
+    4 <exp>
+     5 x
+    4 <exp>
+     5 10
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> accumulate
+  2 <parameter list>
+   3 f
+   3 list
+   3 initVal
+ 1 <exp>
+  2 if
+   3 <exp>
+    4 <fun exp>
+     FUNOP 5 =
+     5 <exp list>
+      6 <exp>
+       7 list
+      6 <exp>
+       7 nil
+  2 then
+   3 <exp>
+    4 initVal
+  2 else
+   3 <exp>
+    4 <fun exp>
+     5 f
+     5 <exp list>
+      6 <exp>
+       7 <fun exp>
+        8 first
+        8 <exp list>
+         9 <exp>
+          10 list
+      6 <exp>
+       7 <fun exp>
+        8 accumulate
+        8 <exp list>
+         9 <exp>
+          10 f
+         9 <exp>
+          10 <fun exp>
+           11 second
+           11 <exp list>
+            12 <exp>
+             13 list
+         9 <exp>
+          10 initVal
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> plus
+  2 <parameter list>
+   3 x
+   3 y
+ 1 <exp>
+  2 <fun exp>
+   3 +
+   3 <exp list>
+    4 <exp>
+     5 x
+    4 <exp>
+     5 y
+

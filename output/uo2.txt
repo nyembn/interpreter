@@ -1,0 +1,349 @@
+0 <fun def>
+ 1 <header>
+  2 <fun name> test
+  2 <parameter list>
+   3 a1
+   3 a2
+   3 a3
+   3 x1
+   3 x2
+   3 x3
+ 1 <exp>
+  2 if
+   3 <exp>
+    4 <fun exp>
+     5 <
+     5 <exp list>
+      6 <exp>
+       7 a1
+      6 <exp>
+       7 a2
+  2 then
+   3 <exp>
+    4 <fun exp>
+     5 +
+     5 <exp list>
+      6 <exp>
+       7 123
+      6 <exp>
+       7 -76
+  2 else
+   3 <exp>
+    4 if
+     5 <exp>
+      6 <fun exp>
+       7 and
+       7 <exp list>
+        8 <exp>
+         9 <fun exp>
+          10 <=
+          10 <exp list>
+           11 <exp>
+            12 x1
+           11 <exp>
+            12 x3
+        8 <exp>
+         9 <fun exp>
+          10 >
+          10 <exp list>
+           11 <exp>
+            12 a3
+           11 <exp>
+            12 a1
+    4 then
+     5 <exp>
+      6 <fun exp>
+       7 -
+       7 <exp list>
+        8 <exp>
+         9 <fun exp>
+          10 /
+          10 <exp list>
+           11 <exp>
+            12 7.0
+           11 <exp>
+            12 0.78
+        8 <exp>
+         9 <fun exp>
+          10 *
+          10 <exp list>
+           11 <exp>
+            12 54.0
+           11 <exp>
+            12 -0.123
+    4 else
+     5 <exp>
+      6 if
+       7 <exp>
+        8 <fun exp>
+         9 or
+         9 <exp list>
+          10 <exp>
+           11 <fun exp>
+            12 <
+            12 <exp list>
+             13 <exp>
+              14 x1
+             13 <exp>
+              14 x3
+          10 <exp>
+           11 <fun exp>
+            12 >=
+            12 <exp list>
+             13 <exp>
+              14 a3
+             13 <exp>
+              14 a1
+      6 then
+       7 <exp>
+        8 <fun exp>
+         9 -
+         9 <exp list>
+          10 <exp>
+           11 <fun exp>
+            12 /
+            12 <exp list>
+             13 <exp>
+              14 87.54
+             13 <exp>
+              14 500000.0
+          10 <exp>
+           11 <fun exp>
+            12 *
+            12 <exp list>
+             13 <exp>
+              14 7.0E15
+             13 <exp>
+              14 -8.754E-22
+      6 else
+       7 <exp>
+        8 if
+         9 <exp>
+          10 <fun exp>
+           11 not
+           11 <exp list>
+            12 <exp>
+             13 <fun exp>
+              14 =
+              14 <exp list>
+               15 <exp>
+                16 x1
+               15 <exp>
+                16 x3
+        8 then
+         9 <exp>
+          10 <fun exp>
+           11 +
+           11 <exp list>
+            12 <exp>
+             13 <fun exp>
+              14 /
+              14 <exp list>
+               15 <exp>
+                16 8.754E-8
+               15 <exp>
+                16 500000.0
+            12 <exp>
+             13 <fun exp>
+              14 *
+              14 <exp list>
+               15 <exp>
+                16 -7.0E-12
+               15 <exp>
+                16 8.7101E24
+        8 else
+         9 <exp>
+          10 <fun exp>
+           11 +
+           11 <exp list>
+            12 <exp>
+             13 <fun exp>
+              14 /
+              14 <exp list>
+               15 <exp>
+                16 -8.754E-8
+               15 <exp>
+                16 500000.0
+            12 <exp>
+             13 <fun exp>
+              14 *
+              14 <exp list>
+               15 <exp>
+                16 -7.0
+               15 <exp>
+                16 8.7E24
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> fib
+  2 <parameter list>
+   3 n
+ 1 <exp>
+  2 if
+   3 <exp>
+    4 <fun exp>
+     5 <=
+     5 <exp list>
+      6 <exp>
+       7 n
+      6 <exp>
+       7 1
+  2 then
+   3 <exp>
+    4 n
+  2 else
+   3 <exp>
+    4 <fun exp>
+     5 +
+     5 <exp list>
+      6 <exp>
+       7 <fun exp>
+        8 fib
+        8 <exp list>
+         9 <exp>
+          10 <fun exp>
+           11 -
+           11 <exp list>
+            12 <exp>
+             13 n
+            12 <exp>
+             13 1
+      6 <exp>
+       7 <fun exp>
+        8 fib
+        8 <exp list>
+         9 <exp>
+          10 <fun exp>
+           11 -
+           11 <exp list>
+            12 <exp>
+             13 n
+            12 <exp>
+             13 2
+
+0 <fun def>
+ 1 <header>
+  2 <fun name> testCond
+  2 <parameter list>
+   3 n
+ 1 <exp>
+  2 if
+   3 <exp>
+    4 <fun exp>
+     5 <
+     5 <exp list>
+      6 <exp>
+       7 n
+      6 <exp>
+       7 0
+  2 then
+   3 <exp>
+    4 -1.0
+  2 else
+   3 <exp>
+    4 if
+     5 <exp>
+      6 <fun exp>
+       7 and
+       7 <exp list>
+        8 <exp>
+         9 <fun exp>
+          10 >=
+          10 <exp list>
+           11 <exp>
+            12 n
+           11 <exp>
+            12 0
+        8 <exp>
+         9 <fun exp>
+          10 <
+          10 <exp list>
+           11 <exp>
+            12 n
+           11 <exp>
+            12 10
+    4 then
+     5 <exp>
+      6 5.0
+    4 else
+     5 <exp>
+      6 if
+       7 <exp>
+        8 <fun exp>
+         9 and
+         9 <exp list>
+          10 <exp>
+           11 <fun exp>
+            12 >=
+            12 <exp list>
+             13 <exp>
+              14 n
+             13 <exp>
+              14 10
+          10 <exp>
+           11 <fun exp>
+            12 <
+            12 <exp list>
+             13 <exp>
+              14 n
+             13 <exp>
+              14 20
+      6 then
+       7 <exp>
+        8 15.0
+      6 else
+       7 <exp>
+        8 if
+         9 <exp>
+          10 <fun exp>
+           11 and
+           11 <exp list>
+            12 <exp>
+             13 <fun exp>
+              14 >=
+              14 <exp list>
+               15 <exp>
+                16 n
+               15 <exp>
+                16 20
+            12 <exp>
+             13 <fun exp>
+              14 <
+              14 <exp list>
+               15 <exp>
+                16 n
+               15 <exp>
+                16 30
+        8 then
+         9 <exp>
+          10 0.025
+        8 else
+         9 <exp>
+          10 if
+           11 <exp>
+            12 <fun exp>
+             13 and
+             13 <exp list>
+              14 <exp>
+               15 <fun exp>
+                16 >=
+                16 <exp list>
+                 17 <exp>
+                  18 n
+                 17 <exp>
+                  18 30
+              14 <exp>
+               15 <fun exp>
+                16 <
+                16 <exp list>
+                 17 <exp>
+                  18 n
+                 17 <exp>
+                  18 40
+          10 then
+           11 <exp>
+            12 3500000.0
+          10 else
+           11 <exp>
+            12 0.45
+

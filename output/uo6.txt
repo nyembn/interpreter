@@ -1,0 +1,2 @@
+if : Syntax Error, unexpected symbol where { expected
+if : Syntax Error, unexpected symbol where fun name expected
