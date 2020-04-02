@@ -157,7 +157,14 @@ public abstract class Parser extends LexAnalyzer
 				getToken();
 				// NEED TO BUILD ERROR CHECKING
 				FunExp fe = funExp();
-				return fe;
+				if(state == State.RParen){
+					getToken();
+					return fe;
+				}
+				else{
+					errorMsg(9);
+					return null;
+				}
 				
 
 		default:
@@ -186,13 +193,14 @@ public abstract class Parser extends LexAnalyzer
 		getToken();
 		ExpList el = expList();
 		// token is already extracted to check expList
-		getToken();
-		//if(state == State.RParen)
+		//getToken();
+		if(state == State.RParen){
 			return new FunExp(fo, el);
-		//else{
-		//	errorMsg(9);
-		//	return null;
-		//}
+		}
+		else{
+			errorMsg(9);
+			return null;
+		}
 	}
 	
 	public static ExpList expList(){
