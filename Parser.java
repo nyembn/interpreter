@@ -42,7 +42,7 @@ public abstract class Parser extends LexAnalyzer
 	static final EmptyParameterList emptyParameterList = new EmptyParameterList();
 	static final Nil nil = new Nil();
 	static final EmptyExpList emptyExpList = new EmptyExpList();
-	static boolean errorFound = false;
+	static boolean syntaxErrorFound = false;
 
 	//m token before you call before you return
 	//m bubble down bubble up
@@ -64,68 +64,70 @@ public abstract class Parser extends LexAnalyzer
 	
 	public static FunDef funDef(){
 	// ⟨fun def⟩ → ⟨header⟩ "{" ⟨exp⟩ "}"
-		// header must be n identifier
-		//focus on token processing and parsing
-		// DO YOU WANT TO CALL HEADER HERE
 		//if(state == State.Id){
-		Header header = header();
+		if ( state == State.Id )
+		{ // Function name is present.
+			Header header = header();
 		
 		if(state == State.LBrace){
-			//token from pREMETER LIST OR FUNNAME
 			getToken();
 			Exp exp = exp();
+			// Gotten the expression will return if there is a right brace
 			if(state == State.RBrace){
 				getToken(); // need token for fundefList
 				return new FunDef(header, exp);
 			}
 		
 			else{
-				errorMsg(7);
+				errorMsg(2);
 				return null;
 			}
 		}
 		
 		else{
-			errorMsg(6);
+			errorMsg(1);
 			return null;
-			}	
+			}
+	}
+		else
+		{
+			errorMsg(0);
+			return null;
+		}
 	}
 	
 	public static Header header(){
-		if ( state == State.Id ){
-			FunName fname = funName();
-			// token from funname so don't need
-			ParameterList pl = parameterList();
-			//token from PL so don;t need
-			return new Header(fname, pl);
-		}
-		
-		else{
-			errorMsg(5);
-			return null;
-		}
-	}
 	
-	public static FunName funName(){
-		FunName funName = new FunName(t);
+	// <header> --> <fun name> <parameter list>
+	// <fun name> --> <id>
+	
+		String funName = t;
 		getToken();
-		return funName;
-	}
+		ParameterList pl = parameterList();
+		return new Header(funName, pl);
+		}
 
 	
 	public static ParameterList parameterList(){
 		if(state == State.Id){// token from header available
 			String id = t;
 			getToken();
+			// Notice recursive call
 			ParameterList pList = parameterList();
 			return new NonEmptyParameterList(id, pList);
 		}
+		
+		else
+			return emptyParameterList; // emptyParameterList is a static constant object
+		
+		/*
 		else if(state == State.LBrace)
 				return new EmptyParameterList();
 		else{
 			errorMsg(8);
 			return null;
 			}
+		*/
 	}
 	
 	public static Exp exp(){
@@ -315,6 +317,7 @@ else{
 		if ( beginsExp() )
 		{
 			Exp exp = exp();
+			// Notice recursive call
 			ExpList expList = expList();
 			return new NonEmptyExpList(exp, expList);
 		}
@@ -325,7 +328,7 @@ else{
 	
 	public static void errorMsg(int i)
 	{
-		errorFound = true;
+		syntaxErrorFound = true;
 		String msg = "";
 		
 		display(t + " : Syntax Error, unexpected symbol where ");
@@ -352,7 +355,7 @@ else{
 		// argv[1]: output file displaying the parse tree or error messages
 
 		setIO( argv[0], argv[1] );
-		setLex();
+		//setLex();
 
 		getToken();
 		FunDefList funDefList = funDefList();

@@ -93,20 +93,20 @@ public abstract class LexAnalyzer extends IO
 		Int,               // 5
 		Float,             // 6
 		FloatE,            // 7
-		Add,              // 8
-		Sub,             // 9
-		Mul,             // 10
-		Div,               // 11
-		LParen,            // 12
-		RParen,            // 13
-		LBrace,				//14
-		RBrace,			//15
-		Lt,		//16
-		Le,		//17
-		Gt,		//18
-		Ge,		//19
-		Eq,		//20
-		FloatF,	//21
+		FloatF,	//8
+		Add,              // 9
+		Sub,             // 10
+		Mul,             // 11
+		Div,               // 12
+		LParen,            // 13
+		RParen,            // 14
+		LBrace,				//15
+		RBrace,			//16
+		Lt,		//17
+		Le,		//18
+		Gt,		//19
+		Ge,		//20
+		Eq,		//21
 		Keyword_if,		//22
 		Keyword_then,	//23
 		Keyword_else,	//24
@@ -128,22 +128,22 @@ public abstract class LexAnalyzer extends IO
 		
 		boolean isArithOp()
 	{
-		return this.compareTo(State.Div) <= 0;
+		return this.compareTo(Div) <= 0;
 	}
 
 	boolean isCompOp()
 	{
-		return this.compareTo(State.Lt) >= 0 && this.compareTo(State.Eq) <= 0;
+		return this.compareTo(Lt) >= 0 && this.compareTo(Eq) <= 0;
 	}
 
 	boolean isBoolOp()
 	{
-		return this.compareTo(State.Keyword_or) >= 0 && this.compareTo(State.Keyword_not) <= 0;
+		return this.compareTo(Keyword_or) >= 0 && this.compareTo(Keyword_not) <= 0;
 	}
 
 	boolean isPairOp()
 	{
-		return this.compareTo(State.Keyword_pair) >= 0 && this.compareTo(State.Keyword_second) <= 0;
+		return this.compareTo(Keyword_pair) >= 0 && this.compareTo(Keyword_second) <= 0;
 	}
 		
 	}

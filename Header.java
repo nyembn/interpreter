@@ -1,20 +1,27 @@
 import java.util.*;
 
 class Header{
-	FunName funName;
+	String funName;
 	ParameterList parameterList;
 	
-	Header(FunName fn, ParameterList pl){
+	Header(String fn, ParameterList pl){
 		funName = fn;
 		parameterList = pl;
 	}
 	
-	void printParseTree(String indent){
-		String indent1 = indent + " ";
-		
-		IO.displayln(indent + indent.length() + " <header>");
-		funName.printParseTree(indent1);
+	void printParseTree(String indent)
+	{
+		IO.displayln(indent + indent.length() + " <header>");					  
+		String indent1 = indent+" ";				  
+		IO.displayln(indent1 + indent1.length() + " <fun name> " + funName);
 		IO.displayln(indent1 + indent1.length() + " <parameter list>");
-		parameterList.printParseTree(indent1);
+		String indent2 = indent1+" ";
+
+		ParameterList p = parameterList;
+		while ( p instanceof NonEmptyParameterList )
+		{
+			IO.displayln(indent2 + indent2.length() + " " + ((NonEmptyParameterList)p).id);
+			p = ((NonEmptyParameterList)p).parameterList;
+		}
 	}
 }
