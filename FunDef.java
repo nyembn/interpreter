@@ -17,6 +17,7 @@ class FunDef extends FunDefList
 		
 		IO.displayln(indent + indent.length() + " <fun def>");
 		header.printParseTree(indent1);
+		IO.displayln(indent1 + indent1.length() + " <exp>");
 		exp.printParseTree(indent1);
 	}
 }

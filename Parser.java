@@ -38,7 +38,10 @@ prefixed with the integer i representing the node's depth and indented by i blan
 
 
 public abstract class Parser extends LexAnalyzer
-{
+{	
+	static final EmptyParameterList emptyParameterList = new EmptyParameterList();
+	static final Nil nil = new Nil();
+	static final EmptyExpList emptyExpList = new EmptyExpList();
 	static boolean errorFound = false;
 
 	//m token before you call before you return
@@ -126,6 +129,9 @@ public abstract class Parser extends LexAnalyzer
 	}
 	
 	public static Exp exp(){
+	
+	// <exp> --> <id> | <int> | <float> | <floatE> | <floatF> | "nil" | "(" <fun exp> ")" | "if" <exp> "then" <exp> "else" <exp>
+		
 		switch ( state )
 		{
 			case Id:
@@ -140,42 +146,59 @@ public abstract class Parser extends LexAnalyzer
 				getToken();
 				return intExp; // object of integer expression
 				
-			/*case Float: case FloatE:
-
+			case Float: case FloatE: case FloatF:
 				Floatp floatElem = new Floatp(Float.parseFloat(t));
 				getToken();
-				return floatElem;*/
+				return floatElem;
 				
-			case Keyword_nil:
+			case Keyword_if:
+				getToken(); // Read keyword so needs next token
+				Exp e_if = exp();
+				
+				// State will change so can use it for other keywords
+				if ( state == State.Keyword_then )
+				{	getToken();
+					Exp e_then = exp();
+						if(state == State.Keyword_else){
+							getToken();
+							Exp e_else = exp();
+							
+							return new IfThenElse(e_if, e_then, e_else);
+						}
+						else
+						errorMsg(5);
+				}
+				else
+					errorMsg(4);
+				return null;
 			
-				Nil nilExp = new Nil(t);
+			case Keyword_nil:
 				getToken();
-				return nilExp;
+				return nil;  // nil is a static constant object.
 				
 			case LParen:
 			
 				getToken();
-				// NEED TO BUILD ERROR CHECKING
 				FunExp fe = funExp();
 				if(state == State.RParen){
 					getToken();
 					return fe;
 				}
 				else{
-					errorMsg(9);
+					errorMsg(3);
 					return null;
 				}
 				
-
 		default:
-
-				errorMsg(2);
+				errorMsg(6);
 				return null;
 		}
 		
 	}
 	
-	public static FunOp functionOperator(){
+	// Better way of implementing than this
+	
+	/*public static FunOp functionOperator(){
 		if(state == State.Add || state == State.Sub || state == State.Mul || state == State.Div || state == State.Lt ||
 			state == State.Gt || state == State.Le || state == State.Ge || state == State.Keyword_and ||
 			state == State.Keyword_or || state == State.Keyword_not || state == State.Keyword_pair ||
@@ -185,30 +208,57 @@ public abstract class Parser extends LexAnalyzer
 			errorMsg(1);
 			return null;
 			}	
-	}
+	}*/
 	
-	public static FunExp funExp(){
-		//getToken(); // need to get token since current is LParen
-		FunOp fo = functionOperator();
-		getToken();
-		ExpList el = expList();
-		// token is already extracted to check expList
-		//getToken();
-		if(state == State.RParen){
-			return new FunExp(fo, el);
+	public static FunExp funExp()
+	
+	{	
+		if ( state == State.Id )
+		{
+			Id id = new Id(t);
+			getToken();
+			ExpList expList = expList();
+			return new FunCall(id, expList);
 		}
-		else{
-			errorMsg(9);
+		else if ( state.isPairOp() || state.isArithOp() || state.isBoolOp() || state.isCompOp() )
+		{
+			State opState = state;
+			getToken();
+			ExpList expList = expList();
+			switch ( opState )
+			{
+				case Add:            return new AddE(expList);
+				case Keyword_pair:   return new Pair(expList);
+				case Keyword_first:  return new First(expList);
+				case Keyword_second: return new Second(expList);
+				case Sub:            return new SubE(expList);
+				case Mul:            return new MulE(expList);
+				case Div:            return new DivE(expList);
+				case Keyword_or:     return new OrE(expList);
+				case Keyword_and:    return new AndE(expList);
+				case Keyword_not:    return new NotE(expList);
+				case Lt:             return new LtE(expList);
+				case Le:             return new LeE(expList);
+				case Gt:             return new GtE(expList);
+				case Ge:             return new GeE(expList);
+				default:             return new EqE(expList); // case Eq
+			}
+		}
+else{
+			errorMsg(7);
 			return null;
 		}
 	}
 	
+/* May be not a good idea
+ 	
 	public static ExpList expList(){
 		//either empty or multiple exp
 		//if state not btwn this and this error
 		if(state == State.Id){
 			Exp e = new Id(t);
 			getToken();
+			// why u are doing this?
 			ExpList el = expList();
 			return new NonEmptyExpressionList(e, el);
 		}
@@ -247,49 +297,73 @@ public abstract class Parser extends LexAnalyzer
 			return new EmptyExpList();	
 	}
 	
-	public static Exp ifThenElse(){
-		return null;
+	*/
+	
+	public static boolean beginsExp()
+	{
+		return
+		state.compareTo(State.Id) >= 0 && state.compareTo(State.FloatF) <= 0 ||
+		state == State.LParen || state == State.Keyword_if || state == State.Keyword_nil
+		;
+	}
+	
+	public static ExpList expList()
+	
+	// <exp list> --> epsilon | <exp> <exp list>
+	
+	{
+		if ( beginsExp() )
+		{
+			Exp exp = exp();
+			ExpList expList = expList();
+			return new NonEmptyExpList(exp, expList);
+		}
+		else
+			return emptyExpList; // emptyExpList is a static constant object.
 	}
 
 	
 	public static void errorMsg(int i)
 	{
 		errorFound = true;
+		String msg = "";
 		
-		display(t + " : Syntax Error, unexpected symbol where");
+		display(t + " : Syntax Error, unexpected symbol where ");
 
 		switch( i )
 		{
-		case 1:	displayln(" operator or id expected"); return;
-		case 2: displayln(" id, int, float, or ( expected"); return;
-		case 3:	displayln(" = expected"); return;
-		case 4:	displayln(" ; expected"); return;
-		case 5:	displayln(" id expected"); return;
-		case 6: displayln(" { expected"); return;
-		case 7: displayln(" } expected"); return;
-		case 8: displayln(" { or id expected"); return;
-		case 9: displayln(" ) expected"); return;		
+		case 0:	msg = "fun name expected"; break;
+		case 1:	msg = "{ expected"; break;							
+		case 2: msg = "} expected"; break;
+		case 3: msg = ") expected"; break;
+		case 4:	msg = "then expected"; break;				
+		case 5:	msg = "else expected"; break;				
+		case 6:	msg = "id, int, float, nil, (, or if expected"; break;
+		case 7:	msg = "fun name, pair, first, second, arith op, bool op, or comp op expected"; break;
 		}
+		
+		displayln(msg);
+		return;
 	}
-
+	
 	public static void main(String argv[])
 	{
-		// argv[0]: input file containing an assignment list
-		// argv[1]: output file displaying the parse tree
-		
+		// argv[0]: input file containing a string of <fun def list>
+		// argv[1]: output file displaying the parse tree or error messages
+
 		setIO( argv[0], argv[1] );
-		//setLex();
+		setLex();
 
 		getToken();
-
-		FunDefList funDefList = funDefList(); //need the first token
-		//AssignmentList assignmentList = assignmentList(); // build a parse tree //m FUCK ITS ON TOP
+		FunDefList funDefList = funDefList();
 		if ( ! t.isEmpty() )
-			errorMsg(5);
-		else if ( ! errorFound )
-			funDefList.printParseTree(""); // print the parse tree in linearly indented form in argv[1] file
-
+			errorMsg(0);
+		else if ( ! syntaxErrorFound )
+			funDefList.printParseTree("");
+		
 		closeIO();
 	}
+	
+	
 }
 

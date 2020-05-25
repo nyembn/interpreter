@@ -10,7 +10,8 @@ class Floatp extends Exp
 	}
 
 	void printParseTree(String indent)
-	{
+	{	super.printParseTree(indent);
+		String indent1 = indent+" ";
 		IO.displayln(indent + indent.length() + " <exp> " + val);
 	}
 }

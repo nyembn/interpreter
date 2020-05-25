@@ -14,6 +14,7 @@ class Header{
 		
 		IO.displayln(indent + indent.length() + " <header>");
 		funName.printParseTree(indent1);
+		IO.displayln(indent1 + indent1.length() + " <parameter list>");
 		parameterList.printParseTree(indent1);
 	}
 }

@@ -15,4 +15,10 @@ class Int extends Exp
 		IO.displayln(indent + indent.length() + " <exp>");
 		IO.displayln(indent1 + indent1.length() + " " + val);
 	}
+	
+	Val Eval(HashMap<String,Val> state)
+	{
+		return new IntVal(val);
+	}
+	
 }

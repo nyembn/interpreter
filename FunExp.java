@@ -1,19 +1,33 @@
 import java.util.*;
 
-class FunExp extends Exp{
-	FunOp fp;
-	ExpList el;
+/* Its abstract a function expression is either of the
+	function expressions */
 	
-	FunExp(FunOp f, ExpList e){
-		fp = f;
-		el = e;
-	}
+abstract class FunExp extends Exp{
+
+	ExpList expList; //either empty or nonempty el
 	
-	void printParseTree(String indent){
-		String indent1 = indent + " ";
-		
-		fp.printParseTree(indent1);
-		el.printParseTree(indent1);
+	abstract String getFunOp();
+	
+	void printParseTree(String indent)
+	{
+		super.printParseTree(indent);
+		String indent1 = indent+" ";
+		IO.displayln(indent1 + indent1.length() + " <fun exp>");
+
+		String indent2 = indent1+" ";
+		IO.displayln(indent2 + indent2.length() + " " + getFunOp());
+		IO.displayln(indent2 + indent2.length() + " <exp list>");
+
+		String indent3 = indent2+" ";
+
+		ExpList p = expList;
+		while ( p instanceof NonEmptyExpList )
+		{
+			// Print the parse tree for the current expression and get the exp list associated with it
+			((NonEmptyExpList)p).exp.printParseTree(indent3);			
+			p = ((NonEmptyExpList)p).expList;	
+		}
 	}
 
 }

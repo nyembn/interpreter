@@ -1,3 +1,19 @@
+FunDefList
+	Fundef
+	MultipleFunction
+Header
+FunName
+ParameterList
+	EmptyParameterList
+	NonEmptyParameterList
 Exp
 	Id
 	Int
+	Floatp
+	Nil
+	IfThenElse
+	FunExp
+FunOp
+ExpList
+	EmptyExpList
+	NonEmptyExpressionList

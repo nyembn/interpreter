@@ -126,6 +126,26 @@ public abstract class LexAnalyzer extends IO
 			return ( this.compareTo(State.Id) >= 0 );  
 		}
 		
+		boolean isArithOp()
+	{
+		return this.compareTo(State.Div) <= 0;
+	}
+
+	boolean isCompOp()
+	{
+		return this.compareTo(State.Lt) >= 0 && this.compareTo(State.Eq) <= 0;
+	}
+
+	boolean isBoolOp()
+	{
+		return this.compareTo(State.Keyword_or) >= 0 && this.compareTo(State.Keyword_not) <= 0;
+	}
+
+	boolean isPairOp()
+	{
+		return this.compareTo(State.Keyword_pair) >= 0 && this.compareTo(State.Keyword_second) <= 0;
+	}
+		
 	}
 
 	// By enumerating the non-final states first and then the final states,

@@ -11,9 +11,8 @@ class NonEmptyParameterList extends ParameterList{
 	
 	void printParseTree(String indent){
 		String indent1 = indent + " ";
-		// it's and and a parameterlist
-		IO.displayln(indent + indent.length() + " <parameter list>");
-		IO.displayln(indent + indent.length() + id);
+		
+		IO.displayln(indent1 + indent1.length() + " " + id);
 		pList.printParseTree(indent);
 		
 	}	
