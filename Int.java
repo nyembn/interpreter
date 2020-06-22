@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Int extends Exp
+final class Int extends Exp
 {
 	int val;
 
@@ -10,9 +10,9 @@ class Int extends Exp
 	}
 
 	void printParseTree(String indent)
-	{	String indent1 = indent + " ";
-	
-		IO.displayln(indent + indent.length() + " <exp>");
+	{	
+		super.printParseTree(indent);
+		String indent1 = indent + " ";
 		IO.displayln(indent1 + indent1.length() + " " + val);
 	}
 	

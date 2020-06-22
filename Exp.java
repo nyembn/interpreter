@@ -5,5 +5,6 @@ abstract class Exp{
 	{
 		IO.displayln(indent + indent.length() + " <exp>");
 	}
-	//abstract Val Eval(HashMap<String,Val> state);
+	
+	abstract Val Eval(HashMap<String,Val> state);
 }

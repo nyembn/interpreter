@@ -1,4 +1,6 @@
-class AddE extends FunExp
+import java.util.*;
+
+final class AddE extends FunExp
 {	
 	AddE(ExpList e)
 	{
@@ -8,5 +10,9 @@ class AddE extends FunExp
 	String getFunOp()
 	{
 		return "+";
+	}
+	Val Eval(HashMap<String,Val> state)
+	{
+		return expList.addEval(state);
 	}
 }

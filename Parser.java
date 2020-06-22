@@ -44,8 +44,6 @@ public abstract class Parser extends LexAnalyzer
 	static final EmptyExpList emptyExpList = new EmptyExpList();
 	static boolean syntaxErrorFound = false;
 
-	//m token before you call before you return
-	//m bubble down bubble up
 	public static FunDefList funDefList(){
 	
 	// ⟨fun def list⟩ → ⟨fun def⟩ | ⟨fun def⟩ ⟨fun def list⟩
@@ -223,13 +221,14 @@ public abstract class Parser extends LexAnalyzer
 			return new FunCall(id, expList);
 		}
 		else if ( state.isPairOp() || state.isArithOp() || state.isBoolOp() || state.isCompOp() )
-		{
+		{	// First building the expList then creating proper expression
 			State opState = state;
 			getToken();
 			ExpList expList = expList();
 			switch ( opState )
 			{
 				case Add:            return new AddE(expList);
+				// Pair's last expression is not empty
 				case Keyword_pair:   return new Pair(expList);
 				case Keyword_first:  return new First(expList);
 				case Keyword_second: return new Second(expList);

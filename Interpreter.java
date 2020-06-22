@@ -14,29 +14,32 @@ public abstract class Interpreter extends Parser
 	*/
 	
 	{
-		/*setIO( argv[0], argv[1] );
+		setIO( argv[0], argv[1] );
 		//setLex();
 		
 		getToken();
 		FunDefList funDefList = funDefList();
+		// So the only thing that can be is a function name
 		if ( ! t.isEmpty() )
 			errorMsg(0);
-		else if ( ! errorFound )
+		else if ( ! syntaxErrorFound )
 		{
 			closeIO();
-	*/
-			setIO( argv[0], argv[1] );
+			setIO( argv[2], argv[3] );
 			getToken();
 			Exp exp = exp();
+			// so exp will finish parsing expressions
+			// anything leftover is unexpexted
 			if ( ! t.isEmpty() )
 				displayln(t + "  -- unexpected symbol");
-			else if ( ! errorFound )
+			else if ( ! syntaxErrorFound )
 			{
 				Val v = exp.Eval(new HashMap<String,Val>());  // evaluate the given expression
 				if ( v != null )
 					System.out.println( v.toString() );   // display the value on the terminal
-			}
+			}				
+		}
 
-			closeIO();
+		closeIO();
 	}
 }

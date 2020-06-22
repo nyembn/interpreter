@@ -1,4 +1,6 @@
-class GtE extends FunExp
+import java.util.*;
+
+final class GtE extends FunExp
 {	
 	GtE(ExpList e)
 	{
@@ -8,5 +10,10 @@ class GtE extends FunExp
 	String getFunOp()
 	{
 		return ">";
+	}
+
+	Val Eval(HashMap<String,Val> state)
+	{
+		return expList.gtEval(state);
 	}
 }

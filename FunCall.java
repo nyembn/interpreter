@@ -1,6 +1,8 @@
-class FunCall extends FunExp
+import java.util.*;
+
+final class FunCall extends FunExp
 {
-	Id func;  // identifier "func" may be a defined function name or a variable
+	Id func;  // identifier "func" may be a variable or a user-defined function name
 	
 	FunCall(Id i, ExpList e)
 	{
@@ -11,5 +13,10 @@ class FunCall extends FunExp
 	String getFunOp()
 	{
 		return func.id;
+	}
+	
+	Val Eval(HashMap<String,Val> state)
+	{
+		return null;	
 	}
 }

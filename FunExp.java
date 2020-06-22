@@ -29,6 +29,8 @@ abstract class FunExp extends Exp{
 			p = ((NonEmptyExpList)p).expList;	
 		}
 	}
+	
+	abstract Val Eval(HashMap<String,Val> state);
 
 }
 

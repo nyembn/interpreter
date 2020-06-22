@@ -1,4 +1,6 @@
-class GeE extends FunExp
+import java.util.*;
+
+final class GeE extends FunExp
 {	
 	GeE(ExpList e)
 	{
@@ -8,5 +10,10 @@ class GeE extends FunExp
 	String getFunOp()
 	{
 		return ">=";
+	}
+
+	Val Eval(HashMap<String,Val> state)
+	{
+		return expList.geEval(state);
 	}
 }

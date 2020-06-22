@@ -1,4 +1,6 @@
-class First extends FunExp
+import java.util.*;
+
+final class First extends FunExp
 {	
 	First(ExpList e)
 	{
@@ -8,5 +10,10 @@ class First extends FunExp
 	String getFunOp()
 	{
 		return "first";
+	}
+	
+	Val Eval(HashMap<String,Val> state)
+	{
+		return expList.firstEval(state);	
 	}
 }

@@ -1,4 +1,6 @@
-class OrE extends FunExp
+import java.util.*;
+
+final class OrE extends FunExp
 {	
 	OrE(ExpList e)
 	{
@@ -8,5 +10,10 @@ class OrE extends FunExp
 	String getFunOp()
 	{
 		return "or";
+	}
+
+	Val Eval(HashMap<String,Val> state)
+	{
+		return expList.orEval(state);
 	}
 }

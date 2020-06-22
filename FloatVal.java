@@ -1,10 +1,10 @@
-final class IntVal extends Val
+final class FloatVal extends Val
 {
-	int val;
+	float val;
 
-	IntVal(int i)
+	FloatVal(float f)
 	{
-		val = i;
+		val = f;
 	}
 
 	public String toString()
@@ -14,12 +14,12 @@ final class IntVal extends Val
 
 	Val cloneVal()
 	{
-		return new IntVal(val);
+		return new FloatVal(val);
 	}
 
 	float floatVal()
 	{
-		return (float)val;
+		return val;
 	}
 
 	boolean isNumber()
@@ -29,6 +29,6 @@ final class IntVal extends Val
 
 	boolean isZero()
 	{
-		return val == 0;
+		return val == 0.0f;
 	}
 }
