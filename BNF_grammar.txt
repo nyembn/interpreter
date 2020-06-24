@@ -1,0 +1,15 @@
+<fun def list> --> <fun def> | <fun def> <fun def list>
+<fun def> --> <header> "{" <exp> "}" 
+<header> --> <fun name> <parameter list>
+<fun name> --> <id> 
+<parameter list> --> epsilon | <id> <parameter list> 
+<exp> --> <id> | <int> | <foat> | <floatE> | <floatF> | "nil" | "(" <fun exp> ")" | "if" <exp> "then" <exp> "else" <exp>
+<fun exp> --> <fun op> <exp list>
+<fun op> --> <id> | "pair" | "first" | "second" | <arith op> | <bool op> | <comp op>
+<arith op> --> + | - | * | /
+<bool op> --> "or" | "and" | "not"
+<comp op> --> "<" | "<=" | ">" | ">=" | "="
+<exp list> --> epsilon | <exp> <exp list>
+ 
+Note: "epsilon" denotes the empty string.
+
