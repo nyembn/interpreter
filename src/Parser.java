@@ -2,34 +2,37 @@
 
 This class is a top-down, recursive-descent parser for the following syntactic categories:
 
- ⟨fun def list⟩ → ⟨fun def⟩ | ⟨fun def⟩ ⟨fun def list⟩
-⟨fun def⟩ → ⟨header⟩ "{" ⟨exp⟩ "}"
-⟨header⟩ → ⟨fun name⟩ ⟨parameter list⟩
-⟨fun name⟩ → ⟨id⟩
-⟨parameter list⟩ → ε | ⟨id⟩ ⟨parameter list⟩
-⟨exp⟩ → ⟨id⟩ | ⟨int⟩ | ⟨float⟩ | ⟨floatE⟩ | ⟨floatF⟩ | "nil" | "(" ⟨fun exp⟩ ")" | "if" ⟨exp⟩ "then" ⟨exp⟩ "else" ⟨exp⟩
-⟨fun exp⟩ → ⟨fun op⟩ ⟨exp list⟩
-⟨fun op⟩ → ⟨id⟩ | "pair" | "first" | "second" | ⟨arith op⟩ | ⟨bool op⟩ | ⟨comp op⟩
-⟨arith op⟩ → + | − | * | /
-⟨bool op⟩ → "or" | "and" | "not"
-⟨comp op⟩ → "<" | "<=" | ">" | ">=" | "="
-⟨exp list⟩ → ε | ⟨exp⟩ ⟨exp list⟩
-
+<fun def list> --> <fun def> | <fun def> <fun def list>
+<fun def> --> <header> "{" <exp> "}" 
+<header> --> <fun name> <parameter list>
+<fun name> --> <id> 
+<parameter list> --> epsilon | <id> <parameter list> 
+<exp> --> <id> | <int> | <foat> | <floatE> | <floatF> | "nil" | "(" <fun exp> ")" | "if" <exp> "then" <exp> "else" <exp>
+<fun exp> --> <fun op> <exp list>
+<fun op> --> <id> | "pair" | "first" | "second" | <arith op> | <bool op> | <comp op>
+<arith op> --> + | - | * | /
+<bool op> --> "or" | "and" | "not"
+<comp op> --> "<" | "<=" | ">" | ">=" | "="
+<exp list> --> epsilon | <exp> <exp list>
+ 
+Note: "epsilon" denotes the empty string.
+ 
 The definitions of the tokens are given in the lexical analyzer class file "LexAnalyzer.java". 
 
-The following variables/functions of "IO"/"LexArithArray" classes are used:
+The following variables/functions of "IO"/"LexAnalyzer" classes are used:
 
 static void display(String s)
 static void displayln(String s)
 static void setIO(String inFile, String outFile)
 static void closeIO()
 
+static void setLex()
 static String t // holds an extracted token
 static State state // the current state of the finite automaton
 static int getToken() // extracts the next token
 
 An explicit parse tree is constructed in the form of nested class objects.
- 
+
 The main function will display the parse tree in linearly indented form.
 Each syntactic category name labeling a node is displayed on a separate line, 
 prefixed with the integer i representing the node's depth and indented by i blanks. 
@@ -46,7 +49,8 @@ public abstract class Parser extends LexAnalyzer
 
 	public static FunDefList funDefList(){
 	
-	// ⟨fun def list⟩ → ⟨fun def⟩ | ⟨fun def⟩ ⟨fun def list⟩
+	// <fun def list> --> <fun def> | <fun def> <fun def list>
+		
 		// it has token from main
 		FunDef funDef = funDef();
 		// if next token is identifier when function definition ends then its a
@@ -61,8 +65,9 @@ public abstract class Parser extends LexAnalyzer
 	}
 	
 	public static FunDef funDef(){
-	// ⟨fun def⟩ → ⟨header⟩ "{" ⟨exp⟩ "}"
-		//if(state == State.Id){
+	
+	// <fun def> --> <header> "{" <exp> "}"
+	
 		if ( state == State.Id )
 		{ // Function name is present.
 			Header header = header();
@@ -117,15 +122,6 @@ public abstract class Parser extends LexAnalyzer
 		
 		else
 			return emptyParameterList; // emptyParameterList is a static constant object
-		
-		/*
-		else if(state == State.LBrace)
-				return new EmptyParameterList();
-		else{
-			errorMsg(8);
-			return null;
-			}
-		*/
 	}
 	
 	public static Exp exp(){
@@ -196,19 +192,6 @@ public abstract class Parser extends LexAnalyzer
 		
 	}
 	
-	// Better way of implementing than this
-	
-	/*public static FunOp functionOperator(){
-		if(state == State.Add || state == State.Sub || state == State.Mul || state == State.Div || state == State.Lt ||
-			state == State.Gt || state == State.Le || state == State.Ge || state == State.Keyword_and ||
-			state == State.Keyword_or || state == State.Keyword_not || state == State.Keyword_pair ||
-			state == State.Keyword_second || state == State.Keyword_first || state == State.Eq || state == State.Id)
-			return new FunOp(t);
-		else{
-			errorMsg(1);
-			return null;
-			}	
-	}*/
 	
 	public static FunExp funExp()
 	
@@ -251,61 +234,12 @@ else{
 		}
 	}
 	
-/* May be not a good idea
- 	
-	public static ExpList expList(){
-		//either empty or multiple exp
-		//if state not btwn this and this error
-		if(state == State.Id){
-			Exp e = new Id(t);
-			getToken();
-			// why u are doing this?
-			ExpList el = expList();
-			return new NonEmptyExpressionList(e, el);
-		}
-		else if(state == State.Int){
-			Exp e = new Int(Integer.parseInt(t));
-			getToken();
-			ExpList el = expList();
-			return new NonEmptyExpressionList(e, el);
-		}
-		else if(state == State.Float){
-			Exp e = new Floatp(Float.parseFloat(t));
-			getToken();
-			ExpList el = expList();
-			return new NonEmptyExpressionList(e, el);
-		}
-		else if(state == State.Keyword_nil){
-			Exp e = new Nil(t);
-			getToken();
-			ExpList el = expList();
-			return new NonEmptyExpressionList(e, el);
-		}
-		else if(state == State.LParen){
-			Exp e = funExp();
-			getToken();
-			ExpList el = expList();
-			return new NonEmptyExpressionList(e, el);
-		}
-		else if(state == State.Keyword_if){
-			Exp e = ifThenElse();
-			getToken();
-			ExpList el = expList();
-			return new NonEmptyExpressionList(e, el);
-		}
-			
-		else
-			return new EmptyExpList();	
-	}
-	
-	*/
 	
 	public static boolean beginsExp()
 	{
 		return
 		state.compareTo(State.Id) >= 0 && state.compareTo(State.FloatF) <= 0 ||
-		state == State.LParen || state == State.Keyword_if || state == State.Keyword_nil
-		;
+		state == State.LParen || state == State.Keyword_if || state == State.Keyword_nil;
 	}
 	
 	public static ExpList expList()
@@ -347,25 +281,5 @@ else{
 		displayln(msg);
 		return;
 	}
-	
-	public static void main(String argv[])
-	{
-		// argv[0]: input file containing a string of <fun def list>
-		// argv[1]: output file displaying the parse tree or error messages
-
-		setIO( argv[0], argv[1] );
-		//setLex();
-
-		getToken();
-		FunDefList funDefList = funDefList();
-		if ( ! t.isEmpty() )
-			errorMsg(0);
-		else if ( ! syntaxErrorFound )
-			funDefList.printParseTree("");
-		
-		closeIO();
-	}
-	
-	
 }
 
