@@ -16,5 +16,10 @@ class MultipleFunction extends FunDefList
 		funDef.printParseTree(indent);
 		funDefList.printParseTree(indent);
 	}
+	
+	FunDef getFunDef()
+	{
+		return funDef;
+	}
 }
 

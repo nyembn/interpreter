@@ -2,8 +2,6 @@ import java.util.*;
 
 final class EmptyExpList extends ExpList
 {
-	// Remember it is pretty much nothing
-	
 	Val addEval(HashMap<String,Val> state)
 	{
 		return new IntVal(0);

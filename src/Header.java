@@ -24,4 +24,14 @@ class Header{
 			p = ((NonEmptyParameterList)p).parameterList;
 		}
 	}
+	
+	String getFunName()
+	{
+		return funName;
+	}
+	
+	ParameterList getParameterList()
+	{
+	    return parameterList;
+	}
 }

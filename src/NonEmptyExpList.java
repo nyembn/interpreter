@@ -30,8 +30,6 @@ final class NonEmptyExpList extends ExpList
 	{	
 		// No exp on emptyExpList
 		Val eVal = exp.Eval(state);
-		// Calling addEval for ExpList not Eval
-		// NOTICE THE DIFFERENCE
 		Val eListVal = expList.addEval(state);
 		if ( eVal == null || eListVal == null )
 			return null;
