@@ -20,5 +20,16 @@ class FunDef extends FunDefList
 		IO.displayln(indent1 + indent1.length() + " <exp>");
 		exp.printParseTree(indent1);
 	}
+	
+	Header getHeader()
+	{
+		return header;
+	}
+	
+	Exp getExp()
+	{
+	    return exp;
+	}
+	
 }
 

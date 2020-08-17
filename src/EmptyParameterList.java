@@ -1,6 +1,6 @@
 import java.util.*;
 
-class EmptyParameterList extends ParameterList // represents ε
+class EmptyParameterList extends ParameterList
 {
 	void printParseTree(String indent){
 		//String indent1 = indent + " ";

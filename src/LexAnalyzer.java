@@ -74,7 +74,7 @@ The function "nextState" returns the next state given the current state and the 
 
 
 **/
-
+import java.util.*;
 
 public abstract class LexAnalyzer extends IO
 {
@@ -169,9 +169,15 @@ public abstract class LexAnalyzer extends IO
 
 	{
 		State nextSt; // the next state of the FA
+		State[] arrayStates = State.values(); //array of states
 
 		t = "";
-		String[] keyWord = { "if", "then", "else", "or", "and", "not", "pair", "first", "second", "nil" };
+		String[] keyWordArray = { "if", "then", "else", "or", "and", "not", "pair", "first", "second", "nil" };
+		HashMap<String, Integer> keyWord = new HashMap<String, Integer>();
+		
+		for(int i=0; i < keyWordArray.length; i++){
+		    keyWord.put(keyWordArray[i], Integer.valueOf(22+i));
+		}
 		state = State.Start;
 
 		if ( Character.isWhitespace((char) a) )
@@ -182,17 +188,16 @@ public abstract class LexAnalyzer extends IO
 		while ( a != -1 ) // do the body if "a" is not end-of-stream
 		{
 			c = (char) a;
-			State[] arrayStates = State.values(); //array of states
 			nextSt = nextState( state, c );
 			if ( nextSt == State.UNDEF ) // The FA will halt.
 			{	// loop through array of string keyword to see if token is a keyword
 				if ( state.isFinal() ){
-					for(int i=0; i < keyWord.length; i++){
-						if (keyWord[i].equals(t)){
-							state = arrayStates[i+22]; // relate index with the ordinal number
+						if (keyWord.containsKey(t)){
+						    //Integer val = keyWord.get(t);
+							state = arrayStates[keyWord.get(t).intValue()]; // relate index with the ordinal number
 							return 1;
 						}
-					}
+						
 				return 1;// valid token extracted
 				}
 				else // "c" is an unexpected character

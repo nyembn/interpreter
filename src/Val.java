@@ -4,7 +4,7 @@
 abstract class Val
 {
 	/*
-	The function cloneVal() is used to evaluate objects of Id class.
+	The function cloneVal() is used to ----evaluate objects of Id class----.
 	Since the objects of NilVal, PairVal, FunVal classes are treated as reference-type objects,
 	their cloneVal() functions are identity functions simply returning "this" target object.
 	*/
