@@ -1,0 +1,1 @@
+(smallerFunction inc square 1)

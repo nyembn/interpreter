@@ -1,0 +1,1 @@
+pair(25, pair(16, pair(9, pair(4, pair(1, nil)))))

@@ -40,7 +40,8 @@ final class FunCall extends FunExp
 	Val Eval(HashMap<String,Val> state)
 	{	
 		int numOfParameter = 0;
-		System.out.println("Entering evaluation");
+		
+		//System.out.println("Entering evaluation");
 		
 		// ***************Check to see if valid function***************
 		
@@ -57,7 +58,8 @@ final class FunCall extends FunExp
 		// PRECISE IMPLEMENTATION ACCORDING TO DEFINITION
 		if( toBeEvaluated != null )
 		{
-			System.out.println("Valid function");
+			//System.out.println("Valid function");
+			
 	    // ***************END Check to see if valid function***************
 			
 		// ***************Check to see if parameters matches***************
@@ -71,7 +73,7 @@ final class FunCall extends FunExp
 				p = ((NonEmptyExpList)p).expList;
 			}
 			
-			System.out.println(func.id + " has " + numOfParameter + " parameter/s.");
+			//System.out.println(func.id + " has " + numOfParameter + " parameter/s.");
 			
 			
 		// Count number of parameters on function definition
@@ -84,10 +86,12 @@ final class FunCall extends FunExp
 		    funCallParameter++;
 			pl = ((NonEmptyParameterList)pl).parameterList;
 		}
+			/*
 			if( numOfParameter == funCallParameter)
 			    System.out.println("Parameter/s match");
 			else
 			    System.out.println("Parameter/s does not match");
+			*/
 			    
 	    // ***************END Check to see if parameters matches***************
 			

@@ -1,0 +1,1 @@
+(apply square 10)

@@ -1,0 +1,5 @@
+Error: function variable f has non-function value 6
+Error: function variable f has non-function value 6
+Error: function variable f has non-function value 6
+Error: function variable f has non-function value 6
+Error: function variable f has non-function value 6

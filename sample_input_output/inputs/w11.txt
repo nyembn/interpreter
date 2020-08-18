@@ -1,0 +1,1 @@
+(filter greaterThan10 (map square (buildList 5)))

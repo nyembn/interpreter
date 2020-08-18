@@ -1,0 +1,179 @@
+cylinderVolume length radius
+{
+	(* length (* (pi) (square radius)))
+}
+
+square x
+{
+	(* x x)
+}
+
+pi
+{
+	3.14159
+}
+
+fact n
+{
+	if (= n 0) then 1
+	else (* n (fact (- n 1)))
+}
+
+Ackermann i j
+{
+	if (= i 0) then (+ j 1)
+	else if (and (> i 0) (= j 0)) then (Ackermann (- i 1) 1)
+	else (Ackermann (- i 1) (Ackermann i (- j 1)))
+}
+
+fib n
+{
+	if (<= n 1) then n
+	else (+ (fib (- n 1)) (fib (- n 2)))
+}
+    
+testCond n
+{
+	if (< n 0) then -1f
+	else if (and (>= n 0) (< n 10)) then 5.0f
+	else if (and (>= n 10) (< n 20)) then +15.F
+	else if (and (>= n 20) (< n 30)) then 25.e-3f
+	else if (and (>= n 30) (< n 40)) then 35E+5f
+	else .45F
+}
+
+arithExample x1 x2 x3 x4 x5
+{
+	(* (+ x1 x2 x3 x4 x5)
+	   (- x1 x2 x3 x4 x5)
+	   (/ x1 x2 x3 x4 x5)
+	)
+}
+
+BoolExample b1 b2 b3 b4 b5 b6 b7 b8 b9 b10
+{
+	(and (or b1 b2 b3 b4 b5)
+	     (and b6 b7 b8 b9 b10)
+	     (not b3)
+	)
+}
+
+length list
+{
+	if (= list nil) then 0
+	else (+ 1 (length (second list)))
+}
+
+buildList i
+{
+	if (= i 0) then nil
+	else (pair i (buildList (- i 1)))
+}
+
+map f list
+{
+	if (= list nil) then nil
+	else (pair (f (first list)) (map f (second list)))
+}
+
+filter f list
+{
+	if (= list nil) then nil
+	else if (f (first list)) then (pair (first list) (filter f (second list)))
+	else (filter f (second list))
+}
+
+greaterThan10 x
+{
+    (> x 10)
+}
+
+accumulate f list initVal
+{
+	if (= list nil) then initVal
+	else (f (first list) (accumulate f (second list) initVal))
+}
+
+append list1 list2
+{
+  if (= list1 nil) then list2
+  else (pair (first list1) (append (second list1) list2))
+}
+
+appendLists lists
+{
+	(accumulate append lists nil)
+}
+
+exampleLists
+{
+	(pair (buildList 2) (pair (buildList 3) (pair (buildList 4) nil)))
+}
+
+myPair x y
+{
+	(pair x y)
+}
+
+add x y
+{
+	(+ x y)
+}
+
+mul x y
+{
+	(* x y)
+}
+
+inc x
+{
+	(+ x 1)
+}
+
+inc2 x
+{
+	(+ x 2)
+}
+
+apply f x
+{
+	(f x)
+}
+
+compose f g x
+{
+	(f (g x))
+}
+
+test x
+{
+	inc
+}
+
+test2 x
+{
+	if (< x 0) then square
+	else if (and (<= 0 x) (< x 10)) then test
+	else (smallerFunction inc square x)
+}
+
+smallerFunction f g x
+{
+	if (< (f x) (g x)) then f else g
+}
+
+smallerValue f g x
+{
+	if (< (f x) (g x)) then (f x) else (g x)
+}
+
+apply1 inc x
+{
+	(inc x)
+}
+
+apply0 f
+{
+	(f)
+}
+

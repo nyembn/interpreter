@@ -1,0 +1,1 @@
+(smallerValue inc square 2)
